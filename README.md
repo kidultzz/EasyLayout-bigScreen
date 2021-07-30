@@ -5,8 +5,34 @@
  >    目前版本，我们只考虑布局当中基本的容器和标题两要素作为基本拖拽源，选择拖拽源组件到画布区进行布局以及相应的配置。标题组件若拖拽至画布上，则为页面标题，若拖拽至已有的容器内，则为容器标题。
  >    
  >![main-interface.png](https://p5-tt.byteimg.com/origin/pgc-image/61fa2aca5a27444a88c53fe74fe12d44.png)
- >在配置完成后，通过下载按钮，可获取到工程文件模板zip压缩包，保存了当前的布局配置信息，解压后即为一个标准前端工程项目。
+ >在配置完成后，通过下载按钮，可获取到工程文件模板zip压缩包，保存了当前的布局配置信息，解压后即为一个标准react工程项目。
  >![download-img.png](https://p26-tt.byteimg.com/origin/pgc-image/09077840389343bb8d4c7f26817c1780.png)
+ >![123.png](https://p5-tt.byteimg.com/origin/pgc-image/2f02684694164c568c0095ab76455163.png)
+
+### 安装
+1. DownLaod
+```sh
+git clone https://github.com/kidultzz/EasyLayout-bigScreen.git
+```
+2. Install
+```bash
+npm install
+```
+or
+```bash
+cnpm install
+```
+### 使用
+
+本地启动
+```sh
+npm run dev
+```
+打包
+```sh
+npm run prod
+```
+**下载得到的工程文件的安装和使用命令同上。**.
 
 ## :symbols:配置模板
 >    用户的每一步配置操作都会被记录下来并保存为一个json格式的数据模板，例如容器组件的定位、大小、背景配置、颜色配置等等。配置模板的设计方案分为容器配置模板和画布（页面）配置两大类；容器配置模板设计为一个数组，数组元素为所创建的容器组件配置对象;画布（页面）配置为一个对象,保存了所有画布上的配置信息。
@@ -18,8 +44,7 @@
   "pageConfig": {...}
 }
 ```
-
-    我们把标题组件的配置信息分别放进了容器配置模板和画布配置模板的结构中，每个容器组件的配置包含了基本配置信息、样式信息和标题信息。同样的，画布配置与容器配置结构基本一致。容器配置的大致结构如下：
+>我们把标题组件的配置信息分别放进了容器配置模板和画布配置模板的结构中，每个容器组件的配置包含了基本配置信息、样式信息和标题信息。同样的，画布配置与容器配置结构基本一致。容器配置的大致结构如下：
 
 ```js
 {
@@ -49,43 +74,7 @@
   }]
 }
 ```
-## :card_index_dividers:工程文件下载
->工程文件的生成流程如下：
->
->![proj-flow.png](https://p26-tt.byteimg.com/origin/pgc-image/1e2898ff5e2d494f8c6728994f308eb8.png)
->
->   下载后的工程可直接运行，保存了我们的json配置信息，包含了一些基础的webpack配置和工具库。工程文件内置了json解析模块，可根据json配置信息的不同，动态生成规范的react目录结构，并动态加载进行页面渲染。
->   
->![123.png](https://p26-tt.byteimg.com/origin/pgc-image/58a98d84b027478c8bd332fdc2f51373.png)
->
->根据组件目录结构动态加载和渲染组件：
-```js
-      //动态加载组件逻辑
-    const importDynamic = useCallback(
-        (componentTpl) => {
-            let promises = [];
-            if (componentTpl) {
-                for (let componentConfig of componentTpl) {
-                    const { componentName } = componentConfig;
-                    let promise = import(`./components/${componentName}/index.jsx`).then((component) => {
-                        return {
-                            component: component.default, 
-                            config: {...componentConfig}
-                        }
-                    });
-                    promises.push(promise);
-                }
-                return promises;
-    
-            } else return promises;
-    
-        },[tpl]);
 
-    //渲染动态组件
-    let renderComponentDynamic = (ComponentDynamic, componentConfig ) => {
-        return <ComponentDynamic key={componentConfig.componentId} {...componentConfig}/>
-    }
-```
 ## :hammer_and_wrench:技术栈
 * **React** 前端框架
 * **redux Toolkit** 状态管理工具
@@ -94,27 +83,4 @@
 * **react-dnd** 基于react的拖拽工具
 * **immutability-helper** 复杂数据副本处理方案
 * **webpack5** 模块打包器
-### 安装
-1. DownLaod
-```sh
-git clone https://github.com/kidultzz/EasyLayout-bigScreen.git
-```
-2. Install
-```bash
-npm install
-```
-or
-```bash
-cnpm install
-```
-### 使用
 
-本地启动
-```sh
-npm run dev
-```
-打包
-```sh
-npm run prod
-```
-**下载得到的工程文件的安装和使用命令同上。**.
