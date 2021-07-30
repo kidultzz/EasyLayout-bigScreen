@@ -1,6 +1,7 @@
 # :house: EasyLayout-bigScreen
 ## :memo:介绍
  >    通过拖拽布局的方式可视化搭建大屏页面。提供了画布、容器和标题三种基本的大屏布局组件，通过对不同组件的配置组合，可实现基本的大屏要素搭建模板。通过工程文件模板下载，为后续开发人员提供了基本的项目开发环境。
+ >![main-interface.png](https://p5-tt.byteimg.com/origin/pgc-image/61fa2aca5a27444a88c53fe74fe12d44.png)
 
 ## :hammer_and_wrench:技术栈
 * **React** 前端框架
