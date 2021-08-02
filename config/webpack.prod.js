@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin; //打包后的canvas可视化分析插件
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -151,6 +152,13 @@ module.exports = {
         new webpack.ProvidePlugin({
             process: "process/browser",
 
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+              from: path.resolve(__dirname, "../assets/"),
+              to: path.resolve(__dirname, "../dist/assets"),
+              toType: "dir"
+            }]
         }),
         new MiniCssExtractPlugin({
             filename: "[name].css",
